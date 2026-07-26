@@ -1,0 +1,69 @@
+<!-- miniprogram-user/pages/upload/upload.wxml -->
+<view class="container">
+  <view class="section">
+    <view class="section-title">📎 选择文件</view>
+    <view class="upload-area" wx:if="{{files.length===0}}" bindtap="chooseFile">
+      <view class="upload-icon">📂</view>
+      <view class="upload-text">点击选择文件</view>
+      <view class="upload-hint">支持 PDF·Word·PPT·Excel·图片</view>
+    </view>
+
+    <view class="file-list" wx:if="{{files.length}}">
+      <view class="file-item" wx:for="{{files}}" wx:key="name">
+        <view class="fi-left">
+          <view class="fi-icon">{{item.icon}}</view>
+          <view class="fi-info">
+            <view class="fi-name">{{item.name}}</view>
+            <view class="fi-meta">{{item.sizeText}} · {{item.pages||'解析中...'}}页</view>
+          </view>
+        </view>
+        <view class="fi-actions">
+          <view class="fi-del" bindtap="removeFile" data-index="{{index}}">✕</view>
+        </view>
+      </view>
+
+      <view class="add-more" bindtap="chooseFile">
+        <view class="add-icon">＋</view>
+        <view>继续添加文件</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{files.length}}">
+    <view class="section-title">⚙️ 打印设置</view>
+    <view class="config-preview card" bindtap="goConfig">
+      <view class="cp-row">
+        <view class="cp-label">份数</view><view class="cp-value">{{config.copies}} 份</view>
+      </view>
+      <view class="cp-row">
+        <view class="cp-label">色彩</view><view class="cp-value">{{config.color==='bw'?'黑白':'彩色'}}</view>
+      </view>
+      <view class="cp-row">
+        <view class="cp-label">单双面</view><view class="cp-value">{{config.duplex==='single'?'单面':'双面'}}</view>
+      </view>
+      <view class="cp-row">
+        <view class="cp-label">纸张</view><view class="cp-value cp-highlight">{{config.paperSize}}</view>
+      </view>
+      <view class="cp-row">
+        <view class="cp-label">装订</view><view class="cp-value">{{bindingMap[config.binding]}}</view>
+      </view>
+      <view class="cp-edit-hint">点击修改 ›</view>
+    </view>
+  </view>
+
+  <view class="price-bar" wx:if="{{files.length}}">
+    <view class="pb-left">
+      <view class="pb-label">预估费用</view>
+      <view class="pb-detail">{{totalPages}} 页 × {{config.copies}} 份</view>
+    </view>
+    <view class="pb-right">
+      <view class="pb-price">¥ {{estimatedPrice}}</view>
+    </view>
+  </view>
+
+  <view class="bottom-bar" wx:if="{{files.length}}">
+    <button class="btn-primary" bindtap="goConfirm" disabled="{{parsing}}">
+      {{parsing ? '文件解析中...' : '下一步：确认订单'}}
+    </button>
+  </view>
+</view>
