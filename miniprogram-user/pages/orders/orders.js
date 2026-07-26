@@ -2,6 +2,7 @@
 Page({
   data: {
     orders: [], activeTab: null, loading: false, noMore: false, pageSize: 20,
+    dbOk: true,
     statusMap: {
       0: { label: '待支付', cls: 'status-pending' },
       1: { label: '已支付', cls: 'status-paid' },
@@ -28,9 +29,13 @@ Page({
         ...o,
         createTimeText: this.formatTime(o.createTime)
       }));
-      this.setData({ orders, noMore: orders.length < this.data.pageSize });
-    } catch (e) { console.error(e); }
-    finally { this.setData({ loading: false }); }
+      this.setData({ orders, noMore: orders.length < this.data.pageSize, dbOk: true });
+    } catch (e) {
+      console.warn('load orders skipped:', e.errCode || e.message);
+      this.setData({ orders: [], dbOk: false });
+    } finally {
+      this.setData({ loading: false });
+    }
   },
   formatTime(ts) {
     if (!ts) return '';
