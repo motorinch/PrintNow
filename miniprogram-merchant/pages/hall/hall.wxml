@@ -1,0 +1,48 @@
+<!-- miniprogram-merchant/pages/hall/hall.wxml -->
+<view class="container">
+  <view class="header-bar">
+    <view class="hb-title">📥 订单大厅</view>
+    <view class="hb-count" wx:if="{{orders.length}}">共 {{orders.length}} 单</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{activeTab===null?'active':''}}" bindtap="switchTab" data-tab="">全部</view>
+    <view class="tab {{activeTab===1?'active':''}}" bindtap="switchTab" data-tab="1">待打印</view>
+    <view class="tab {{activeTab===2?'active':''}}" bindtap="switchTab" data-tab="2">打印中</view>
+  </view>
+
+  <view wx:if="{{orders.length===0&&!loading}}" class="empty-state">
+    <view class="icon">🎉</view>
+    <view class="text">暂无新订单</view>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="_id" class="card order-card" bindtap="goDetail" data-id="{{item._id}}">
+    <view class="oc-header">
+      <view class="oc-no">{{item.orderNo}}</view>
+      <view class="status-tag {{statusMap[item.status].cls}}">{{statusMap[item.status].label}}</view>
+    </view>
+    <view class="oc-body">
+      <view class="oc-files">
+        <view wx:for="{{item.files}}" wx:for-item="f" wx:for-index="fi" wx:key="name" class="oc-file">
+          {{f.name}} <text class="oc-pages">({{f.pages}}页)</text>
+        </view>
+      </view>
+      <view class="oc-config">
+        <text class="oc-tag">{{item.printConfig.copies}}份</text>
+        <text class="oc-tag">{{item.printConfig.color==='bw'?'黑白':'彩色'}}</text>
+        <text class="oc-tag">{{item.printConfig.paperSize}}</text>
+        <text class="oc-tag">{{item.printConfig.duplex==='single'?'单面':'双面'}}</text>
+      </view>
+    </view>
+    <view class="oc-footer">
+      <view class="oc-price">¥ {{item.totalPrice}}</view>
+      <view class="oc-time">{{item.createTimeText}}</view>
+    </view>
+    <view class="oc-actions" wx:if="{{item.status===1}}">
+      <button class="btn-primary btn-sm" catchtap="acceptOrder" data-id="{{item._id}}">确认接单</button>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:if="{{noMore&&orders.length}}" class="loading">— 没有更多了 —</view>
+</view>
