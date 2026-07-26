@@ -1,0 +1,58 @@
+<!-- miniprogram-user/pages/config/config.wxml -->
+<view class="container">
+  <view class="card">
+    <view class="config-item">
+      <view class="ci-label">打印份数</view>
+      <view class="ci-stepper">
+        <view class="step-btn" bindtap="minusCopies">−</view>
+        <view class="step-value">{{config.copies}}</view>
+        <view class="step-btn" bindtap="plusCopies">＋</view>
+      </view>
+    </view>
+
+    <view class="config-item">
+      <view class="ci-label">打印色彩</view>
+      <view class="ci-options">
+        <view class="option {{config.color==='bw'?'active':''}}" data-key="color" data-val="bw" bindtap="selectOption">黑白</view>
+        <view class="option {{config.color==='color'?'active':''}}" data-key="color" data-val="color" bindtap="selectOption">彩色</view>
+      </view>
+    </view>
+
+    <view class="config-item">
+      <view class="ci-label">单双面</view>
+      <view class="ci-options">
+        <view class="option {{config.duplex==='single'?'active':''}}" data-key="duplex" data-val="single" bindtap="selectOption">单面</view>
+        <view class="option {{config.duplex==='duplex'?'active':''}}" data-key="duplex" data-val="duplex" bindtap="selectOption">双面</view>
+      </view>
+    </view>
+
+    <view class="config-item">
+      <view class="ci-label">纸张大小</view>
+      <view class="ci-options">
+        <view class="option {{config.paperSize==='A4'?'active':''}}" data-key="paperSize" data-val="A4" bindtap="selectOption">A4</view>
+        <view class="option {{config.paperSize==='A3'?'active':''}}" data-key="paperSize" data-val="A3" bindtap="selectOption">A3</view>
+      </view>
+    </view>
+
+    <view class="config-item" style="border:none">
+      <view class="ci-label">装订方式</view>
+      <view class="ci-options">
+        <view class="option {{config.binding==='none'?'active':''}}" data-key="binding" data-val="none" bindtap="selectOption">无</view>
+        <view class="option {{config.binding==='staple'?'active':''}}" data-key="binding" data-val="staple" bindtap="selectOption">订书钉</view>
+        <view class="option {{config.binding==='glue'?'active':''}}" data-key="binding" data-val="glue" bindtap="selectOption">胶装</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="price-summary card">
+    <view class="ps-title">💰 价格预估</view>
+    <view class="ps-row"><text>黑白单面</text><text>0.20 元/页</text></view>
+    <view class="ps-row"><text>彩色单面</text><text>1.00 元/页</text></view>
+    <view class="ps-row"><text>双面打印</text><text>每面单价的 60%</text></view>
+    <view class="ps-row"><text>A3 纸张</text><text>单价的 1.5 倍</text></view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="btn-primary" bindtap="saveConfig">保存设置</button>
+  </view>
+</view>
