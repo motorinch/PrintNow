@@ -2,7 +2,7 @@
 const app = getApp();
 Page({
   data: {
-    orders: [], activeTab: null, loading: false, noMore: false, pageSize: 20,
+    orders: [], activeTab: null, loading: false, noMore: false, pageSize: 20, dbOk: true,
     statusMap: app.globalData.statusMap
   },
   onShow() { this.loadOrders(); },
@@ -18,15 +18,16 @@ Page({
         name: 'getOrders', data: { role: 'merchant', status: this.data.activeTab, pageSize: this.data.pageSize }
       });
       const orders = (result.orders || []).map(o => ({ ...o, createTimeText: this.fmt(o.createTime) }));
-      this.setData({ orders, noMore: orders.length < this.data.pageSize });
-    } catch (e) { console.error(e); }
-    finally { this.setData({ loading: false }); }
+      this.setData({ orders, noMore: orders.length < this.data.pageSize, dbOk: true });
+    } catch (e) {
+      console.warn('load orders skipped:', e.errCode || e.message);
+      this.setData({ orders: [], dbOk: false });
+    } finally { this.setData({ loading: false }); }
   },
   async acceptOrder(e) {
     const orderId = e.currentTarget.dataset.id;
     wx.showModal({
-      title: 'Confirm',
-      content: 'Accept this order?',
+      title: 'Confirm', content: 'Accept this order?',
       success: async r => {
         if (!r.confirm) return;
         try {
