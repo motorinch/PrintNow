@@ -1,0 +1,54 @@
+<!-- miniprogram-user/pages/order-detail/order-detail.wxml -->
+<view class="container">
+  <view class="status-bar">
+    <view class="sb-steps">
+      <view class="step {{order.status>=0?'done':''}} {{order.status===0?'current':''}}">下单</view>
+      <view class="step-line {{order.status>=1?'done':''}}"></view>
+      <view class="step {{order.status>=1?'done':''}} {{order.status===1?'current':''}}">支付</view>
+      <view class="step-line {{order.status>=2?'done':''}}"></view>
+      <view class="step {{order.status>=2?'done':''}} {{order.status===2?'current':''}}">打印</view>
+      <view class="step-line {{order.status>=3?'done':''}}"></view>
+      <view class="step {{order.status>=3?'done':''}} {{order.status===3?'current':''}}">取件</view>
+      <view class="step-line {{order.status>=4?'done':''}}"></view>
+      <view class="step {{order.status>=4?'done':''}}">完成</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{order.pickupCode}}">
+    <view class="pickup-box">
+      <view class="pickup-title">📮 取件码</view>
+      <view class="pickup-code-big">{{order.pickupCode}}</view>
+      <view class="pickup-hint">请凭此码到店取件</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">📋 订单详情</view>
+    <view class="info-row"><text>订单编号</text><text>{{order.orderNo}}</text></view>
+    <view class="info-row"><text>订单状态</text>
+      <view class="status-tag {{statusCls}}">{{statusLabel}}</view>
+    </view>
+    <view class="info-row"><text>文件数量</text><text>{{order.files.length}} 个</text></view>
+    <view class="info-row"><text>总页数</text><text>{{totalPages}} 页</text></view>
+    <view class="info-row"><text>打印份数</text><text>{{order.printConfig.copies}} 份</text></view>
+    <view class="info-row"><text>色彩</text><text>{{order.printConfig.color==='bw'?'黑白':'彩色'}}</text></view>
+    <view class="info-row"><text>纸张</text><text>{{order.printConfig.paperSize}} / {{order.printConfig.duplex==='single'?'单面':'双面'}}</text></view>
+    <view class="info-row"><text>装订</text><text>{{bindingMap[order.printConfig.binding]}}</text></view>
+    <view class="info-row"><text>取件人</text><text>{{order.pickupName}}</text></view>
+    <view class="info-row total-row"><text>支付金额</text><text class="total-price">¥ {{order.totalPrice}}</text></view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">📄 文件列表</view>
+    <view class="file-row" wx:for="{{order.files}}" wx:for-item="f" wx:key="name">
+      <text class="fr-icon">{{f.name.endsWith('.pdf')?'📕':'📄'}}</text>
+      <text class="fr-name">{{f.name}}</text>
+      <text class="fr-pages">{{f.pages}}页</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{order.remark}}">
+    <view class="section-title">💬 备注</view>
+    <view class="remark-text">{{order.remark}}</view>
+  </view>
+</view>
