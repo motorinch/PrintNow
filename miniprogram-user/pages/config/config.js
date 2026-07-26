@@ -6,14 +6,10 @@ Page({
     if (config) this.setData({ config });
   },
   minusCopies() {
-    if (this.data.config.copies > 1) {
-      this.setData({ 'config.copies': this.data.config.copies - 1 });
-    }
+    if (this.data.config.copies > 1) this.setData({ 'config.copies': this.data.config.copies - 1 });
   },
   plusCopies() {
-    if (this.data.config.copies < 99) {
-      this.setData({ 'config.copies': this.data.config.copies + 1 });
-    }
+    if (this.data.config.copies < 99) this.setData({ 'config.copies': this.data.config.copies + 1 });
   },
   selectOption(e) {
     const { key, val } = e.currentTarget.dataset;

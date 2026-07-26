@@ -18,8 +18,6 @@ Page({
   },
 
   onShow() {
-    // 从参数设置页返回时更新配置
-    const pages = getCurrentPages();
     const config = wx.getStorageSync('printConfig');
     if (config) {
       this.setData({ config });
@@ -58,8 +56,8 @@ Page({
 
   getFileIcon(name) {
     const ext = name.split('.').pop().toLowerCase();
-    const map = { pdf: '📕', doc: '📘', docx: '📘', ppt: '📙', pptx: '📙', xls: '📗', xlsx: '📗', jpg: '🖼️', jpeg: '🖼️', png: '🖼️', gif: '🖼️' };
-    return map[ext] || '📄';
+    const map = { pdf: '\uD83D\uDCD5', doc: '\uD83D\uDCD8', docx: '\uD83D\uDCD8', ppt: '\uD83D\uDCD9', pptx: '\uD83D\uDCD9', xls: '\uD83D\uDCD7', xlsx: '\uD83D\uDCD7', jpg: '\uD83D\uDDBC', jpeg: '\uD83D\uDDBC', png: '\uD83D\uDDBC', gif: '\uD83D\uDDBC' };
+    return map[ext] || '\uD83D\uDCC4';
   },
 
   formatSize(bytes) {
@@ -72,14 +70,12 @@ Page({
     for (let i = 0; i < newFiles.length; i++) {
       const file = newFiles[i];
       try {
-        // 上传到云存储
         const cloudPath = 'print-files/' + Date.now() + '_' + file.name;
         const uploadRes = await wx.cloud.uploadFile({
           cloudPath: cloudPath,
           filePath: file.path
         });
 
-        // 调用云函数解析文件页数
         const parseRes = await wx.cloud.callFunction({
           name: 'parseFile',
           data: { fileID: uploadRes.fileID, fileName: file.name }
@@ -94,8 +90,8 @@ Page({
           this.setData({ files });
         }
       } catch (e) {
-        console.error('上传解析失败:', file.name, e);
-        wx.showToast({ title: file.name + ' 上传失败', icon: 'none' });
+        console.error('upload failed:', file.name, e);
+        wx.showToast({ title: file.name + ' upload failed', icon: 'none' });
       }
     }
     this.setData({ parsing: false });
@@ -107,7 +103,7 @@ Page({
     const totalPages = files.reduce((sum, f) => sum + (f.pages || 0), 0);
     let pricePerPage = config.color === 'bw' ? 0.2 : 1.0;
     if (config.paperSize === 'A3') pricePerPage *= 1.5;
-    if (config.duplex === 'duplex') pricePerPage *= 0.6; // 双面时每面折价
+    if (config.duplex === 'duplex') pricePerPage *= 0.6;
     const estimatedPrice = (totalPages * pricePerPage * config.copies).toFixed(2);
     this.setData({ totalPages, estimatedPrice });
   },
@@ -119,7 +115,7 @@ Page({
 
   goConfirm() {
     if (this.data.files.length === 0) {
-      wx.showToast({ title: '请先选择文件', icon: 'none' });
+      wx.showToast({ title: 'Please select files first', icon: 'none' });
       return;
     }
     wx.setStorageSync('printConfig', this.data.config);

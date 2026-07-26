@@ -14,27 +14,20 @@ Page({
     }
   },
 
-  onShow() {
-    this.loadRecentOrders();
-  },
+  onShow() { this.loadRecentOrders(); },
 
   async loadRecentOrders() {
     try {
       const db = wx.cloud.database();
       const res = await db.collection('orders')
-        .orderBy('createTime', 'desc')
-        .limit(3)
-        .get();
+        .orderBy('createTime', 'desc').limit(3).get();
       this.setData({ recentOrders: res.data });
-    } catch (e) {
-      console.error('加载订单失败:', e);
-    }
+    } catch (e) { console.error('load failed:', e); }
   },
 
   goUpload() { wx.navigateTo({ url: '/pages/upload/upload' }); },
   goOrders() { wx.switchTab({ url: '/pages/orders/orders' }); },
   goDetail(e) {
-    const id = e.currentTarget.dataset.id;
-    wx.navigateTo({ url: '/pages/order-detail/order-detail?id=' + id });
+    wx.navigateTo({ url: '/pages/order-detail/order-detail?id=' + e.currentTarget.dataset.id });
   }
 });

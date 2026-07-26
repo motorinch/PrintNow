@@ -1,11 +1,7 @@
 // miniprogram-user/pages/orders/orders.js
 Page({
   data: {
-    orders: [],
-    activeTab: null,
-    loading: false,
-    noMore: false,
-    pageSize: 20,
+    orders: [], activeTab: null, loading: false, noMore: false, pageSize: 20,
     statusMap: {
       0: { label: '待支付', cls: 'status-pending' },
       1: { label: '已支付', cls: 'status-paid' },
@@ -15,15 +11,12 @@ Page({
       5: { label: '已取消', cls: 'status-cancelled' }
     }
   },
-
   onShow() { this.loadOrders(); },
-
   switchTab(e) {
     const tab = e.currentTarget.dataset.tab;
     this.setData({ activeTab: tab === '' ? null : Number(tab), orders: [], noMore: false });
     this.loadOrders();
   },
-
   async loadOrders() {
     this.setData({ loading: true });
     try {
@@ -36,20 +29,15 @@ Page({
         createTimeText: this.formatTime(o.createTime)
       }));
       this.setData({ orders, noMore: orders.length < this.data.pageSize });
-    } catch (e) {
-      console.error('加载订单失败:', e);
-    } finally {
-      this.setData({ loading: false });
-    }
+    } catch (e) { console.error(e); }
+    finally { this.setData({ loading: false }); }
   },
-
   formatTime(ts) {
     if (!ts) return '';
     const d = new Date(ts);
     const pad = n => ('0' + n).slice(-2);
-    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
   },
-
   goDetail(e) {
     wx.navigateTo({ url: '/pages/order-detail/order-detail?id=' + e.currentTarget.dataset.id });
   }

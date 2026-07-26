@@ -6,10 +6,7 @@ Page({
   async loadOrders() {
     this.setData({ loading: true });
     try {
-      const { result } = await wx.cloud.callFunction({
-        name: 'getOrders',
-        data: { role: 'merchant', status: 2, pageSize: 50 }
-      });
+      const { result } = await wx.cloud.callFunction({ name: 'getOrders', data: { role: 'merchant', status: 2, pageSize: 50 } });
       this.setData({ orders: result.orders || [] });
     } catch (e) { console.error(e); }
     finally { this.setData({ loading: false }); }

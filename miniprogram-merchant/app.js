@@ -2,10 +2,10 @@
 App({
   onLaunch() {
     if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
+      console.error('Please use base library version 2.2.3 or above for cloud capabilities');
     } else {
       wx.cloud.init({
-        env: 'printnow-xxxxxx', // 替换为你的云环境ID
+        env: 'cloudbase-d7g8b9shyba5d75ce',
         traceUser: true
       });
     }
@@ -13,29 +13,26 @@ App({
   },
 
   async checkLogin() {
-    const merchant = wx.getStorageSync('merchantInfo');
-    if (!merchant) {
+    try {
       const { result } = await wx.cloud.callFunction({ name: 'login' });
-      if (result && result.user && result.user.role === 'merchant') {
+      if (result && result.user) {
         wx.setStorageSync('merchantInfo', result.user);
         this.globalData.merchantInfo = result.user;
-      } else {
-        wx.redirectTo({ url: '/pages/login/login' });
       }
-    } else {
-      this.globalData.merchantInfo = merchant;
+    } catch (e) {
+      console.error('Login failed:', e);
     }
   },
 
   globalData: {
     merchantInfo: null,
     statusMap: {
-      0: { label: '待支付', cls: 'status-pending' },
-      1: { label: '已支付', cls: 'status-paid' },
-      2: { label: '打印中', cls: 'status-printing' },
-      3: { label: '待取件', cls: 'status-pickup' },
-      4: { label: '已完成', cls: 'status-done' },
-      5: { label: '已取消', cls: 'status-cancelled' }
+      0: { label: 'Pending', cls: 'status-pending' },
+      1: { label: 'Paid', cls: 'status-paid' },
+      2: { label: 'Printing', cls: 'status-printing' },
+      3: { label: 'Pickup', cls: 'status-pickup' },
+      4: { label: 'Done', cls: 'status-done' },
+      5: { label: 'Cancelled', cls: 'status-cancelled' }
     }
   }
 });
