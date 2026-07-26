@@ -1,0 +1,4 @@
+/* miniprogram-merchant/pages/settings/settings.wxss */
+.btn-outline { background: #fff; color: var(--primary); border: 2rpx solid var(--primary); border-radius: var(--radius); padding: 24rpx 48rpx; font-size: 32rpx; text-align: center; }
+.bottom-actions { margin-top: 32rpx; display: flex; flex-direction: column; gap: 16rpx; }
+.bottom-actions button { width: 100%; margin: 0; border-radius: var(--radius); }

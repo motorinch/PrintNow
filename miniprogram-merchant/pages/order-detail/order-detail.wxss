@@ -1,0 +1,11 @@
+/* miniprogram-merchant/pages/order-detail/order-detail.wxss */
+.highlight { color: var(--danger); font-weight: 700; font-size: 32rpx; }
+.pickup-code { font-size: 36rpx; font-weight: 700; color: var(--primary); letter-spacing: 6rpx; }
+.file-row { display: flex; align-items: center; padding: 16rpx 0; border-bottom: 1rpx solid var(--border); }
+.file-row:last-child { border-bottom: none; }
+.fr-icon { font-size: 32rpx; margin-right: 12rpx; }
+.fr-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 26rpx; }
+.fr-pages { font-size: 24rpx; color: #999; margin: 0 16rpx; }
+.fr-preview { background: var(--primary); color: #fff; border-radius: 8rpx; padding: 8rpx 24rpx; font-size: 24rpx; border: none; }
+.actions { margin-top: 24rpx; display: flex; flex-direction: column; gap: 16rpx; }
+.actions button { width: 100%; margin: 0; border-radius: var(--radius); }

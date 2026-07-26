@@ -1,0 +1,16 @@
+<!-- miniprogram-merchant/pages/processing/processing.wxml -->
+<view class="container">
+  <view class="section-title">🖨️ 进行中的订单</view>
+  <view wx:if="{{orders.length===0&&!loading}}" class="empty-state">
+    <view class="icon">☕</view>
+    <view class="text">暂无进行中的订单</view>
+  </view>
+  <view wx:for="{{orders}}" wx:key="_id" class="card" bindtap="goDetail" data-id="{{item._id}}">
+    <view style="display:flex;justify-content:space-between;align-items:center">
+      <view style="font-weight:500">{{item.orderNo}}</view>
+      <view class="status-tag {{statusMap[item.status].cls}}">{{statusMap[item.status].label}}</view>
+    </view>
+    <view style="margin-top:12rpx;font-size:24rpx;color:#999">{{item.files.length}}个文件 · ¥{{item.totalPrice}} · {{item.pickupName}}</view>
+  </view>
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+</view>

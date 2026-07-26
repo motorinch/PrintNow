@@ -1,0 +1,55 @@
+<!-- miniprogram-merchant/pages/settings/settings.wxml -->
+<view class="container">
+  <view class="card">
+    <view class="section-title">🏪 店铺信息</view>
+    <view class="form-group">
+      <view class="form-label">店铺名称</view>
+      <input class="form-input" value="{{shopName}}" bindinput="onShopName" placeholder="请输入店铺名称" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">联系电话</view>
+      <input class="form-input" type="number" value="{{shopPhone}}" bindinput="onShopPhone" placeholder="请输入联系电话" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">店铺地址</view>
+      <input class="form-input" value="{{shopAddress}}" bindinput="onShopAddress" placeholder="请输入店铺地址" />
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">💰 价格设置</view>
+    <view class="form-group">
+      <view class="form-label">黑白打印（元/页）</view>
+      <input class="form-input" type="digit" value="{{priceBW}}" bindinput="onPriceBW" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">彩色打印（元/页）</view>
+      <input class="form-input" type="digit" value="{{priceColor}}" bindinput="onPriceColor" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">双面打印折扣系数</view>
+      <input class="form-input" type="digit" value="{{priceDuplex}}" bindinput="onPriceDuplex" placeholder="0.6 表示双面=单面价的60%" />
+    </view>
+    <view class="form-group">
+      <view class="form-label">A3加价系数</view>
+      <input class="form-input" type="digit" value="{{priceA3}}" bindinput="onPriceA3" placeholder="1.5 表示A3=A4价的1.5倍" />
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">🔔 通知设置</view>
+    <view class="form-group" style="display:flex;justify-content:space-between;align-items:center">
+      <text>新订单通知</text>
+      <switch checked="{{notifyNewOrder}}" bindchange="onNotifyNewOrder" color="#2C3E50" />
+    </view>
+    <view class="form-group" style="display:flex;justify-content:space-between;align-items:center">
+      <text>订单完成通知</text>
+      <switch checked="{{notifyDone}}" bindchange="onNotifyDone" color="#2C3E50" />
+    </view>
+  </view>
+
+  <view class="bottom-actions">
+    <button class="btn-primary" bindtap="saveSettings">保存设置</button>
+    <button class="btn-outline" bindtap="logout">退出登录</button>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+/* miniprogram-merchant/app.wxss */
+page {
+  --primary: #2C3E50;
+  --primary-light: #34495E;
+  --success: #27AE60;
+  --warning: #F39C12;
+  --danger: #E74C3C;
+  --text: #2C3E50;
+  --text-secondary: #95A5A6;
+  --bg: #F8F9FA;
+  --white: #FFFFFF;
+  --border: #E0E0E0;
+  --radius: 12rpx;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+.container { padding: 24rpx; min-height: 100vh; }
+.btn-primary {
+  background: var(--primary); color: #fff; border-radius: var(--radius);
+  border: none; padding: 24rpx 48rpx; font-size: 32rpx; text-align: center;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-primary:active { opacity: 0.85; }
+.btn-success { background: var(--success); color: #fff; border-radius: var(--radius); border: none; padding: 18rpx 36rpx; font-size: 28rpx; }
+.btn-warning { background: var(--warning); color: #fff; border-radius: var(--radius); border: none; padding: 18rpx 36rpx; font-size: 28rpx; }
+.btn-danger  { background: var(--danger); color: #fff; border-radius: var(--radius); border: none; padding: 18rpx 36rpx; font-size: 28rpx; }
+.card {
+  background: #fff; border-radius: var(--radius);
+  padding: 24rpx; margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05);
+}
+.status-tag {
+  display: inline-block; padding: 6rpx 20rpx; border-radius: 20rpx;
+  font-size: 24rpx; font-weight: 500;
+}
+.status-pending   { background: #FFF3E0; color: #E65100; }
+.status-paid      { background: #E3F2FD; color: #1565C0; }
+.status-printing  { background: #E8F5E9; color: #2E7D32; }
+.status-pickup    { background: #FCE4EC; color: #C62828; }
+.status-done      { background: #E8F5E9; color: #2E7D32; }
+.status-cancelled { background: #FFEBEE; color: #C62828; }
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 120rpx 0; color: var(--text-secondary);
+}
+.empty-state .icon { font-size: 100rpx; margin-bottom: 24rpx; }

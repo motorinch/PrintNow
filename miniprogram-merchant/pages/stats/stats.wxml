@@ -1,0 +1,65 @@
+<!-- miniprogram-merchant/pages/stats/stats.wxml -->
+<view class="container">
+  <view class="section-title">📊 收益统计</view>
+
+  <view class="card summary-cards">
+    <view class="sc-item">
+      <view class="sc-num">{{stats.todayOrders}}</view>
+      <view class="sc-label">今日订单</view>
+    </view>
+    <view class="sc-item highlight">
+      <view class="sc-num">¥ {{stats.todayIncome}}</view>
+      <view class="sc-label">今日收入</view>
+    </view>
+    <view class="sc-item">
+      <view class="sc-num">{{stats.weekOrders}}</view>
+      <view class="sc-label">本周订单</view>
+    </view>
+    <view class="sc-item highlight">
+      <view class="sc-num">¥ {{stats.weekIncome}}</view>
+      <view class="sc-label">本周收入</view>
+    </view>
+  </view>
+
+  <view class="card summary-cards">
+    <view class="sc-item">
+      <view class="sc-num">{{stats.monthOrders}}</view>
+      <view class="sc-label">本月订单</view>
+    </view>
+    <view class="sc-item highlight">
+      <view class="sc-num">¥ {{stats.monthIncome}}</view>
+      <view class="sc-label">本月收入</view>
+    </view>
+    <view class="sc-item">
+      <view class="sc-num">{{stats.totalOrders}}</view>
+      <view class="sc-label">累计订单</view>
+    </view>
+    <view class="sc-item highlight">
+      <view class="sc-num">¥ {{stats.totalIncome}}</view>
+      <view class="sc-label">累计收入</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">📈 近7天趋势</view>
+    <view class="chart">
+      <view class="bar-wrapper" wx:for="{{chartData}}" wx:key="date">
+        <view class="bar" style="height:{{item.height}}rpx;background:{{item.color}}">
+          <view class="bar-val" wx:if="{{item.value>0}}">{{item.value}}</view>
+        </view>
+        <view class="bar-label">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">🔝 订单状态分布</view>
+    <view wx:for="{{statusDist}}" wx:key="label" class="dist-row">
+      <view class="dist-label">{{item.label}}</view>
+      <view class="dist-bar-bg">
+        <view class="dist-bar" style="width:{{item.pct}}%;background:{{item.color}}"></view>
+      </view>
+      <view class="dist-num">{{item.count}}</view>
+    </view>
+  </view>
+</view>

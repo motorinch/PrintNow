@@ -1,0 +1,9 @@
+{
+  "miniprogramRoot": "./",
+  "cloudfunctionRoot": "../cloudfunctions/",
+  "setting": { "es6": true, "enhance": true, "minified": true },
+  "appid": "wx5dba7c0a2adcf583",
+  "projectname": "PrintNow-Merchant",
+  "libVersion": "2.32.0",
+  "condition": {}
+}

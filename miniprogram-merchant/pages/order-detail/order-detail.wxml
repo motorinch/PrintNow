@@ -1,0 +1,42 @@
+<!-- miniprogram-merchant/pages/order-detail/order-detail.wxml -->
+<view class="container">
+  <view class="card">
+    <view class="section-title">📋 {{order.orderNo}}</view>
+    <view class="info-row">
+      <text>状态</text><view class="status-tag {{statusCls}}">{{statusLabel}}</view>
+    </view>
+    <view class="info-row"><text>金额</text><text class="highlight">¥ {{order.totalPrice}}</text></view>
+    <view class="info-row"><text>取件人</text><text>{{order.pickupName}} {{order.pickupPhone}}</text></view>
+    <view class="info-row"><text>取件码</text><text class="pickup-code">{{order.pickupCode}}</text></view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">⚙️ 打印参数</view>
+    <view class="info-row"><text>份数</text><text>{{order.printConfig.copies}} 份</text></view>
+    <view class="info-row"><text>色彩</text><text>{{order.printConfig.color==='bw'?'黑白':'彩色'}}</text></view>
+    <view class="info-row"><text>纸张</text><text>{{order.printConfig.paperSize}} / {{order.printConfig.duplex==='single'?'单面':'双面'}}</text></view>
+    <view class="info-row"><text>装订</text><text>{{bindingMap[order.printConfig.binding]}}</text></view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">📄 文件列表（{{order.files.length}}个）</view>
+    <view class="file-row" wx:for="{{order.files}}" wx:for-item="f" wx:key="name">
+      <view class="fr-icon">{{f.name.endsWith('.pdf')?'📕':'📄'}}</view>
+      <view class="fr-name">{{f.name}}</view>
+      <view class="fr-pages">{{f.pages}}页</view>
+      <button class="fr-preview" bindtap="previewFile" data-id="{{f.fileID}}" data-name="{{f.name}}">预览</button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{order.remark}}">
+    <view class="section-title">💬 备注</view>
+    <view>{{order.remark}}</view>
+  </view>
+
+  <view class="actions">
+    <button wx:if="{{order.status===1}}" class="btn-primary" bindtap="changeStatus" data-status="2">确认接单，开始打印</button>
+    <button wx:if="{{order.status===2}}" class="btn-success" bindtap="changeStatus" data-status="3">打印完成，通知取件</button>
+    <button wx:if="{{order.status===3}}" class="btn-warning" bindtap="changeStatus" data-status="4">确认已取件</button>
+    <button wx:if="{{order.status===1}}" class="btn-danger" bindtap="changeStatus" data-status="5">取消订单</button>
+  </view>
+</view>

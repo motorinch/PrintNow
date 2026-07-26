@@ -1,0 +1,7 @@
+{
+  "name": "parseFile",
+  "version": "1.0.0",
+  "description": "Parse uploaded file to get page count",
+  "main": "index.js",
+  "dependencies": { "wx-server-sdk": "latest" }
+}

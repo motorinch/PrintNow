@@ -1,0 +1,35 @@
+<!-- miniprogram-user/pages/orders/orders.wxml -->
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{activeTab===null?'active':''}}" bindtap="switchTab" data-tab="">全部</view>
+    <view class="tab {{activeTab===0?'active':''}}" bindtap="switchTab" data-tab="0">待支付</view>
+    <view class="tab {{activeTab===2?'active':''}}" bindtap="switchTab" data-tab="2">打印中</view>
+    <view class="tab {{activeTab===3?'active':''}}" bindtap="switchTab" data-tab="3">待取件</view>
+    <view class="tab {{activeTab===4?'active':''}}" bindtap="switchTab" data-tab="4">已完成</view>
+  </view>
+
+  <view wx:if="{{orders.length===0&&!loading}}" class="empty-state">
+    <view class="icon">📭</view>
+    <view class="text">暂无订单</view>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="_id" class="card order-card" bindtap="goDetail" data-id="{{item._id}}">
+    <view class="oc-header">
+      <view class="oc-no">{{item.orderNo}}</view>
+      <view class="status-tag {{statusMap[item.status].cls}}">{{statusMap[item.status].label}}</view>
+    </view>
+    <view class="oc-files">
+      <view wx:for="{{item.files}}" wx:for-item="f" wx:key="name" class="oc-file">{{f.name}}</view>
+    </view>
+    <view class="oc-footer">
+      <view class="oc-price">¥ {{item.totalPrice}}</view>
+      <view class="oc-time">{{item.createTimeText}}</view>
+    </view>
+    <view class="oc-pickup" wx:if="{{item.pickupCode}}">
+      取件码：<text class="pickup-code">{{item.pickupCode}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:if="{{noMore}}" class="loading">— 没有更多了 —</view>
+</view>

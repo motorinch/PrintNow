@@ -1,0 +1,15 @@
+/* miniprogram-user/pages/config/config.wxss */
+.config-item { padding: 28rpx 0; border-bottom: 1rpx solid var(--border); }
+.ci-label { font-size: 28rpx; font-weight: 500; margin-bottom: 16rpx; }
+.ci-stepper { display: flex; align-items: center; }
+.step-btn { width: 56rpx; height: 56rpx; border: 2rpx solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 36rpx; color: var(--primary); }
+.step-value { width: 80rpx; text-align: center; font-size: 36rpx; font-weight: 700; }
+.ci-options { display: flex; gap: 16rpx; }
+.option { flex: 1; padding: 20rpx 0; text-align: center; border: 2rpx solid var(--border); border-radius: var(--radius); font-size: 26rpx; transition: all 0.2s; }
+.option.active { border-color: var(--primary); background: #EBF3FC; color: var(--primary); font-weight: 600; }
+
+.price-summary {}
+.ps-title { font-size: 28rpx; font-weight: 600; margin-bottom: 16rpx; }
+.ps-row { display: flex; justify-content: space-between; padding: 12rpx 0; font-size: 26rpx; color: #666; }
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 20rpx 24rpx 40rpx; background: #fff; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.06); }
+.bottom-bar .btn-primary { width: 100%; }
