@@ -2,7 +2,7 @@
 App({
   onLaunch() {
     if (!wx.cloud) {
-      console.error('Please use base library version 2.2.3 or above for cloud capabilities');
+      console.error('Please use base library version 2.2.3 or above');
     } else {
       wx.cloud.init({
         env: 'cloudbase-d7g8b9shyba5d75ce',
@@ -20,7 +20,7 @@ App({
         this.globalData.merchantInfo = result.user;
       }
     } catch (e) {
-      console.error('Login failed:', e);
+      console.warn('Login deferred (deploy cloud functions to enable):', e.errCode);
     }
   },
 
