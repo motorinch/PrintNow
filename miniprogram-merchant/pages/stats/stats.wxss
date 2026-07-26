@@ -1,0 +1,18 @@
+/* miniprogram-merchant/pages/stats/stats.wxss */
+.summary-cards { display: flex; }
+.sc-item { flex: 1; text-align: center; padding: 12rpx 0; }
+.sc-item.highlight .sc-num { color: var(--danger); }
+.sc-num { font-size: 30rpx; font-weight: 700; }
+.sc-label { font-size: 20rpx; color: #999; margin-top: 4rpx; }
+
+.chart { display: flex; align-items: flex-end; height: 220rpx; gap: 10rpx; }
+.bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.bar { width: 100%; border-radius: 6rpx 6rpx 0 0; display: flex; align-items: flex-start; justify-content: center; min-height: 8rpx; transition: height 0.5s; }
+.bar-val { font-size: 18rpx; color: #333; margin-top: 4rpx; }
+.bar-label { font-size: 18rpx; color: #999; margin-top: 8rpx; }
+
+.dist-row { display: flex; align-items: center; padding: 14rpx 0; }
+.dist-label { width: 100rpx; font-size: 24rpx; }
+.dist-bar-bg { flex: 1; height: 20rpx; background: #f0f0f0; border-radius: 10rpx; overflow: hidden; margin: 0 16rpx; }
+.dist-bar { height: 100%; border-radius: 10rpx; transition: width 0.5s; }
+.dist-num { width: 60rpx; text-align: right; font-size: 24rpx; color: #666; }
