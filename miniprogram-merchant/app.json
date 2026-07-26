@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/hall/hall",
+    "pages/order-detail/order-detail",
+    "pages/processing/processing",
+    "pages/history/history",
+    "pages/stats/stats",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2C3E50",
+    "navigationBarTitleText": "PrintNow 商家",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2C3E50",
+    "backgroundColor": "#ffffff",
+    "list": [
+      { "pagePath": "pages/hall/hall", "text": "接单", "iconPath": "images/hall.png", "selectedIconPath": "images/hall-active.png" },
+      { "pagePath": "pages/processing/processing", "text": "进行中", "iconPath": "images/processing.png", "selectedIconPath": "images/processing-active.png" },
+      { "pagePath": "pages/history/history", "text": "历史", "iconPath": "images/history.png", "selectedIconPath": "images/history-active.png" },
+      { "pagePath": "pages/settings/settings", "text": "设置", "iconPath": "images/settings.png", "selectedIconPath": "images/settings-active.png" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
