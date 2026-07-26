@@ -1,0 +1,7 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "User login and registration",
+  "main": "index.js",
+  "dependencies": { "wx-server-sdk": "latest" }
+}
