@@ -1,6 +1,4 @@
 // miniprogram-user/pages/index/index.js
-const app = getApp();
-
 Page({
   data: {
     recentOrders: [],
@@ -11,7 +9,8 @@ Page({
       3: { label: '待取件', cls: 'status-pickup' },
       4: { label: '已完成', cls: 'status-done' },
       5: { label: '已取消', cls: 'status-cancelled' }
-    }
+    },
+    dbOk: true
   },
 
   onShow() { this.loadRecentOrders(); },
@@ -21,8 +20,11 @@ Page({
       const db = wx.cloud.database();
       const res = await db.collection('orders')
         .orderBy('createTime', 'desc').limit(3).get();
-      this.setData({ recentOrders: res.data });
-    } catch (e) { console.error('load failed:', e); }
+      this.setData({ recentOrders: res.data, dbOk: true });
+    } catch (e) {
+      console.warn('load orders skipped:', e.errCode || e.message);
+      this.setData({ recentOrders: [], dbOk: false });
+    }
   },
 
   goUpload() { wx.navigateTo({ url: '/pages/upload/upload' }); },
